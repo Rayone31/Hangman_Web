@@ -18,6 +18,10 @@ func main() {
 		http.ServeFile(w, r, "options.html")
 	})
 
+	http.HandleFunc("/style.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "style.css")
+	})
+
 	fmt.Println("Server started on port 8080")
 	http.ListenAndServe(":8080", nil)
 }
