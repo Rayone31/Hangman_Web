@@ -1,2 +1,2 @@
-Hello this is the project
+HANGMAN WEB
 Branch Florian
