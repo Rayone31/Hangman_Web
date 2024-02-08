@@ -1,0 +1,37 @@
+banco
+oficina
+armario
+azulejo
+silla
+aula
+llave
+esquina
+pasillo
+atrás
+agua
+escuela
+escritura
+entrada
+escalera
+estantería
+estudio
+exterior
+ventana
+interior
+lavabo
+lectura
+cama
+escalón
+colchón
+jardín de infancia
+muebles
+espuma
+pared
+puerta
+perchero
+cubo de basura
+radiador
+rampa
+recreo
+vuelta al cole
+aseo

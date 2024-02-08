@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Hangman Game</h1>
+
+    <!-- Affichage du mot partiel -->
+    <div id="partial-word">{{.PartialWord}}</div>
+
+    <!-- Affichage des lettres devinées -->
+    <div id="guessed-letters">
+        Lettres devinées :
+        {{range .GuessedLetters}}
+            {{.}}
+        {{end}}
+    </div>
+
+    <!-- Affichage du nombre de vies restantes -->
+    <div id="lives-remaining">
+        Vies restantes : {{.LivesRemaining}}
+    </div>
+
+    <!-- Affichage du statut du jeu -->
+    {{if eq .GameStatus "victory"}}
+        <div id="game-status">
+            Vous avez gagné !
+        </div>
+    {{else if eq .GameStatus "game over"}}
+        <div id="game-status">
+            Game Over. Le mot était : {{.PartialWord}}
+        </div>
+    {{end}}
+
+    <!-- Formulaire pour proposer une lettre -->
+    {{if eq .GameStatus ""}}
+        <form action="/guess" method="post">
+            <label for="letter">Proposez une lettre:</label>
+            <input type="text" id="letter" name="letter" maxlength="1">
+            <button type="submit">Proposer</button>
+        </form>
+    {{else}}
+        <form action="/" method="get">
+            <button type="submit">Nouvelle partie</button>
+        </form>
+    {{end}}
+</body>
+</html>
