@@ -16,23 +16,32 @@ type Game struct {
     GameStatus     string
 }
 
-var game Game
+var (
+    initialWord string // Variable globale pour stocker le mot initialisé
+    game        Game   // Variable globale pour le jeu en cours
+)
 
 // Fonction pour initialiser le jeu
 func InitGame() {
-    // Choix aléatoire du fichier de mots
-    files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
-    rand.Seed(time.Now().UnixNano())
-    fileIndex := rand.Intn(len(files))
-    filePath := files[fileIndex]
+    // Vérifier si le mot a déjà été initialisé
+    if initialWord == "" {
+        // Choix aléatoire du fichier de mots
+        files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
+        rand.Seed(time.Now().UnixNano())
+        fileIndex := rand.Intn(len(files))
+        filePath := files[fileIndex]
 
-    // Lecture du fichier et choix aléatoire d'un mot
-    word := getRandomWordFromFile(filePath)
+        // Lecture du fichier et choix aléatoire d'un mot
+        word := getRandomWordFromFile(filePath)
+
+        // Stockage du mot initialisé dans la variable globale
+        initialWord = word
+    }
 
     // Initialisation du jeu avec le mot choisi
     game = Game{
-        Word:           word,
-        PartialWord:    strings.Repeat("-", len(word)),
+        Word:           initialWord,
+        PartialWord:    strings.Repeat("-", len(initialWord)),
         GuessedLetters: []string{},
         LivesRemaining: 10,
         GameStatus:     "",
@@ -68,6 +77,11 @@ func GuessLetter(letter string) {
 
     // Mettre à jour le mot partiel avec la lettre proposée si elle est correcte
     game.PartialWord = updatePartialWord(letter)
+
+    // Vérifier si le joueur a perdu
+    if game.LivesRemaining == 0 {
+        game.GameStatus = "game over"
+    }
 }
 
 // Fonction pour mettre à jour le mot partiel avec la lettre proposée si elle est correcte
@@ -103,4 +117,9 @@ func getRandomWordFromFile(filePath string) string {
 
     rand.Seed(time.Now().UnixNano())
     return words[rand.Intn(len(words))]
+}
+
+// Fonction pour réinitialiser le mot initialisé
+func ResetInitialWord() {
+    initialWord = ""
 }
