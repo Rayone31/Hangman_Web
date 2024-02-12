@@ -1,0 +1,32 @@
+body {
+    text-align: center;
+    background-color: midnightblue;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#hangman_titre img {
+   height: 175px;
+   width: auto;
+}
+
+.button {  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 15px;
+    max-width: 15%;
+    margin: auto;
+    margin-top: 5%;
+    background-color: aliceblue;
+    color: black;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: deepskyblue;
+}
