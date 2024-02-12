@@ -42,6 +42,7 @@ func InitGame() {
         LivesRemaining: 10,
         GameStatus:     "",
         ProposedLetters: []string{},
+        HangmanImage:   "/assets/Hangman_0.png",
     }
 }
 
@@ -68,7 +69,7 @@ func GuessLetter(letter string) {
 
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
-        game.HangmanImage = fmt.Sprintf("/pictures/Hangman_%d.png", 10-game.LivesRemaining)
+        game.HangmanImage = fmt.Sprintf("/assets/Hangman_%d.png", 10-game.LivesRemaining)
     }
 
     game.PartialWord = updatePartialWord(letter)

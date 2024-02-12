@@ -12,14 +12,6 @@
     <!-- Affichage du mot partiel -->
     <div id="partial-word">{{.PartialWord}}</div>
 
-    <!-- Affichage des lettres devinées -->
-    <div id="guessed-letters">
-        Lettres devinées :
-        {{range .GuessedLetters}}
-            {{.}}
-        {{end}}
-    </div>
-
     <!-- Affichage des lettres proposées -->
     <div id="proposed-letters">
         Lettres proposées :
@@ -36,11 +28,11 @@
     <!-- Affichage du statut du jeu -->
     {{if eq .GameStatus "victory"}}
         <div id="game-status">
-            <img src="/pictures/victory.png" alt="Victoire">
+            <img src="/assets/victory.png" alt="Victoire">
         </div>
     {{else if eq .GameStatus "game over"}}
         <div id="game-status">
-            <img src="/pictures/defaite.png" alt="Défaite">
+            <img src="/assets/defaite.png" alt="Défaite">
             <form action="/finish" method="get">
                 <button type="submit">Retourner à l'accueil</button>
             </form>
