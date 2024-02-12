@@ -16,10 +16,9 @@ func main() {
     http.HandleFunc("/guess", guessHandler)
     http.HandleFunc("/jouer", jouerHandler)
     http.HandleFunc("/abandon", abandonHandler)
-    http.HandleFunc("/style.css", styleHandler)
 
-    fs := http.FileServer(http.Dir("pictures"))
-    http.Handle("/pictures/", http.StripPrefix("/pictures/", fs))
+    fs := http.FileServer(http.Dir("assets"))
+    http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
     fmt.Println("Server started on port 8080")
     http.ListenAndServe(":8080", nil)
@@ -64,8 +63,4 @@ func guessHandler(w http.ResponseWriter, r *http.Request) {
 func abandonHandler(w http.ResponseWriter, r *http.Request) {
     play.ResetInitialWord()
     http.Redirect(w, r, "/", http.StatusFound)
-}
-
-func styleHandler(w http.ResponseWriter, r *http.Request) {
-    http.ServeFile(w, r, "static/style.css")
 }
