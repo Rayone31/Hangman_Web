@@ -36,11 +36,14 @@
     <!-- Affichage du statut du jeu -->
     {{if eq .GameStatus "victory"}}
         <div id="game-status">
-            Vous avez gagné !
+            <img src="/pictures/victory.png" alt="Victoire">
         </div>
     {{else if eq .GameStatus "game over"}}
         <div id="game-status">
-            Game Over. Le mot était : {{.PartialWord}}
+            <img src="/pictures/defaite.png" alt="Défaite">
+            <form action="/finish" method="get">
+                <button type="submit">Retourner à l'accueil</button>
+            </form>
         </div>
     {{end}}
 
@@ -55,10 +58,15 @@
             <button type="submit">Abandonner</button>
         </form>
     {{else}}
-        <form action="/" method="get">
+        <form action="/finish" method="get">
             <button type="submit">Nouvelle partie</button>
         </form>
     {{end}}
+
+    <!-- Affichage du pendu -->
+    <div id="hangman-image">
+        <img src="{{.HangmanImage}}" alt="Pendu">
+    </div>
 
 </body>
 </html>

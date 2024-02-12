@@ -16,6 +16,7 @@ func main() {
     http.HandleFunc("/guess", guessHandler)
     http.HandleFunc("/jouer", jouerHandler)
     http.HandleFunc("/abandon", abandonHandler)
+    http.HandleFunc("/finish", StatusHandler)
 
     fs := http.FileServer(http.Dir("assets"))
     http.Handle("/assets/", http.StripPrefix("/assets/", fs))
@@ -29,8 +30,7 @@ func hangmanHandler(w http.ResponseWriter, r *http.Request) {
         play.InitGame()
     }
     game := play.GetGame()
-    fmt.Println("Page refreshed successfully")
-    err := templates.ExecuteTemplate(w, "hangman.html", game)
+       err := templates.ExecuteTemplate(w, "hangman.html", game)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -61,6 +61,16 @@ func guessHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func abandonHandler(w http.ResponseWriter, r *http.Request) {
-    play.ResetInitialWord()
+    play.ResetGame()
     http.Redirect(w, r, "/", http.StatusFound)
 }
+
+func StatusHandler(w http.ResponseWriter, r *http.Request) {
+    play.ResetGame()
+    http.Redirect(w, r, "/", http.StatusFound)
+}
+
+
+
+
+

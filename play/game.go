@@ -6,6 +6,7 @@ import (
     "os"
     "strings"
     "time"
+    "fmt"
 )
 
 type Game struct {
@@ -15,6 +16,7 @@ type Game struct {
     LivesRemaining int
     GameStatus     string
     ProposedLetters []string
+    HangmanImage    string
 }
 
 var (
@@ -49,6 +51,7 @@ func GetGame() *Game {
 
 func GuessLetter(letter string) {
     if game.GameStatus != "" {
+        ResetGame()
         return
     }
 
@@ -65,11 +68,14 @@ func GuessLetter(letter string) {
 
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
+        game.HangmanImage = fmt.Sprintf("/pictures/Hangman_%d.png", 10-game.LivesRemaining)
     }
 
     game.PartialWord = updatePartialWord(letter)
 
-    if game.LivesRemaining == 0 {
+    if game.PartialWord == game.Word {
+        game.GameStatus = "victory"
+    } else if game.LivesRemaining == 0 {
         game.GameStatus = "game over"
     }
 }
@@ -112,6 +118,7 @@ func getRandomWordFromFile(filePath string) string {
     return words[rand.Intn(len(words))]
 }
 
-func ResetInitialWord() {
+func ResetGame() {
     initialWord = ""
+    game = Game{}
 }
