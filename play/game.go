@@ -17,17 +17,21 @@ type Game struct {
     ProposedLetters []string
 }
 
-var game Game
+var (
+    initialWord string
+    game        Game
+)
 
 func InitGame() {
-    // Choix aléatoire du fichier de mots
-    files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
-    rand.Seed(time.Now().UnixNano())
-    fileIndex := rand.Intn(len(files))
-    filePath := files[fileIndex]
+    if initialWord == "" {
+        files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
+        rand.Seed(time.Now().UnixNano())
+        fileIndex := rand.Intn(len(files))
+        filePath := files[fileIndex]
 
-    // Lecture du fichier et choix aléatoire d'un mot
-    word := getRandomWordFromFile(filePath)
+        word := getRandomWordFromFile(filePath)
+        initialWord = word
+    }
 
     game = Game{
         Word:           initialWord,
@@ -64,9 +68,17 @@ func GuessLetter(letter string) {
     }
 
     game.PartialWord = updatePartialWord(letter)
+
+    if game.LivesRemaining == 0 {
+        game.GameStatus = "game over"
+    }
 }
 
-// Fonction pour mettre à jour le mot partiel avec la lettre proposée si elle est correcte
+func (g *Game) AddProposedLetter(letter string) {
+    g.ProposedLetters = append(g.ProposedLetters, letter)
+}
+
+
 func updatePartialWord(letter string) string {
     updatedWord := ""
     for i, char := range game.Word {
@@ -98,11 +110,6 @@ func getRandomWordFromFile(filePath string) string {
 
     rand.Seed(time.Now().UnixNano())
     return words[rand.Intn(len(words))]
-}
-
-// Fonction pour réinitialiser le mot initialisé
-func ResetInitialWord() {
-    initialWord = ""
 }
 
 func ResetInitialWord() {

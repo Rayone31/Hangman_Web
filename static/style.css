@@ -8,18 +8,25 @@ body {
     position: relative;
 }
 
-body {
-    background-color: rgb(32, 32, 78);
+img {
+    height: 350px;
+    width: auto;
 }
 
-.button {
+.button {  
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     border-radius: 15px;
+    max-width: 15%;
+    margin: auto;
+    margin-top: 5%;
     background-color: aliceblue;
     color: black;
     text-decoration: none;
 }
 
 .button:hover {
-    background-color: aqua;
+    background-color: deepskyblue;
 }
