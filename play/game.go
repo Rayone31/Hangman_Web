@@ -14,63 +14,71 @@ type Game struct {
     GuessedLetters []string
     LivesRemaining int
     GameStatus     string
+    ProposedLetters []string
 }
 
-var game Game
+var (
+    initialWord string
+    game        Game
+)
 
-// Fonction pour initialiser le jeu
 func InitGame() {
-    // Choix aléatoire du fichier de mots
-    files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
-    rand.Seed(time.Now().UnixNano())
-    fileIndex := rand.Intn(len(files))
-    filePath := files[fileIndex]
+    if initialWord == "" {
+        files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
+        rand.Seed(time.Now().UnixNano())
+        fileIndex := rand.Intn(len(files))
+        filePath := files[fileIndex]
 
-    // Lecture du fichier et choix aléatoire d'un mot
-    word := getRandomWordFromFile(filePath)
+        word := getRandomWordFromFile(filePath)
+        initialWord = word
+    }
 
-    // Initialisation du jeu avec le mot choisi
     game = Game{
-        Word:           word,
-        PartialWord:    strings.Repeat("-", len(word)),
+        Word:           initialWord,
+        PartialWord:    strings.Repeat("-", len(initialWord)),
         GuessedLetters: []string{},
         LivesRemaining: 10,
         GameStatus:     "",
+        ProposedLetters: []string{},
     }
 }
 
-// Fonction pour obtenir l'objet de jeu actuel
-func GetGame() Game {
-    return game
+func GetGame() *Game {
+    return &game
 }
 
-// Fonction pour proposer une lettre
 func GuessLetter(letter string) {
-    // Vérifier si le jeu est terminé
     if game.GameStatus != "" {
         return
     }
 
-    // Vérifier si la lettre a déjà été devinée
+    // Ajouter la lettre proposée à la liste des lettres proposées
+    game.ProposedLetters = append(game.ProposedLetters, letter)
+
     for _, guessedLetter := range game.GuessedLetters {
         if guessedLetter == letter {
             return
         }
     }
 
-    // Ajouter la lettre à la liste des lettres devinées
     game.GuessedLetters = append(game.GuessedLetters, letter)
 
-    // Réduire le nombre de vies restantes si la lettre proposée n'est pas dans le mot
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
     }
 
-    // Mettre à jour le mot partiel avec la lettre proposée si elle est correcte
     game.PartialWord = updatePartialWord(letter)
+
+    if game.LivesRemaining == 0 {
+        game.GameStatus = "game over"
+    }
 }
 
-// Fonction pour mettre à jour le mot partiel avec la lettre proposée si elle est correcte
+func (g *Game) AddProposedLetter(letter string) {
+    g.ProposedLetters = append(g.ProposedLetters, letter)
+}
+
+
 func updatePartialWord(letter string) string {
     updatedWord := ""
     for i, char := range game.Word {
@@ -83,7 +91,6 @@ func updatePartialWord(letter string) string {
     return updatedWord
 }
 
-// Fonction pour obtenir un mot aléatoire à partir d'un fichier
 func getRandomWordFromFile(filePath string) string {
     file, err := os.Open(filePath)
     if err != nil {
@@ -103,4 +110,8 @@ func getRandomWordFromFile(filePath string) string {
 
     rand.Seed(time.Now().UnixNano())
     return words[rand.Intn(len(words))]
+}
+
+func ResetInitialWord() {
+    initialWord = ""
 }

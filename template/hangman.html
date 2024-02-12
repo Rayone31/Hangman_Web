@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman Game</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h1>Hangman Game</h1>
-
+    <div id="word">{{.Word}}</div>
     <!-- Affichage du mot partiel -->
     <div id="partial-word">{{.PartialWord}}</div>
 
@@ -16,6 +16,14 @@
     <div id="guessed-letters">
         Lettres devinées :
         {{range .GuessedLetters}}
+            {{.}}
+        {{end}}
+    </div>
+
+    <!-- Affichage des lettres proposées -->
+    <div id="proposed-letters">
+        Lettres proposées :
+        {{range .ProposedLetters}}
             {{.}}
         {{end}}
     </div>
@@ -43,10 +51,14 @@
             <input type="text" id="letter" name="letter" maxlength="1">
             <button type="submit">Proposer</button>
         </form>
+        <form action="/abandon" method="get"> <!-- Nouveau formulaire pour abandonner la partie -->
+            <button type="submit">Abandonner</button>
+        </form>
     {{else}}
         <form action="/" method="get">
             <button type="submit">Nouvelle partie</button>
         </form>
     {{end}}
+
 </body>
 </html>
