@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "Pixel";
+    src: url(../assets/matrix-sans.woff) format("woff");
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Pixel";
     text-align: center;
     background-color: firebrick;
     color: gold;
