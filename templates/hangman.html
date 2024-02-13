@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman Game</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/hangman.css">
 </head>
 <body>
     <h1>Hangman Game</h1>
@@ -18,6 +18,10 @@
         {{range .ProposedLetters}}
             {{.}}
         {{end}}
+    </div>
+
+    <div id="score">
+        Score : {{.Score}}
     </div>
 
     <!-- Affichage du nombre de vies restantes -->
@@ -46,11 +50,12 @@
             <input type="text" id="letter" name="letter" maxlength="1">
             <button type="submit">Proposer</button>
         </form>
+
         <form action="/abandon" method="get"> <!-- Nouveau formulaire pour abandonner la partie -->
             <button type="submit">Abandonner</button>
         </form>
     {{else}}
-        <form action="/finish" method="get">
+        <form action="/difficulty" method="get">
             <button type="submit">Nouvelle partie</button>
         </form>
     {{end}}

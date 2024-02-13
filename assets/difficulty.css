@@ -30,30 +30,12 @@ img {
 .button:hover {
     background-color: deepskyblue;
 }
-/* Styles spécifiques pour le jeu Hangman */
+/* Styles spécifiques pour la page de choix de la difficulté */
 
-#word {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-#partial-word {
-    font-size: 24px;
+form {
     margin-bottom: 20px;
 }
 
-#proposed-letters {
-    margin-bottom: 20px;
-}
-
-#lives-remaining {
-    margin-bottom: 20px;
-}
-
-#game-status {
-    margin-bottom: 20px;
-}
-
-#hangman-image {
-    margin-bottom: 20px;
+button {
+    margin-top: 10px;
 }

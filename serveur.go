@@ -17,6 +17,7 @@ func main() {
     http.HandleFunc("/jouer", jouerHandler)
     http.HandleFunc("/abandon", abandonHandler)
     http.HandleFunc("/finish", StatusHandler)
+    http.HandleFunc("/difficulty", difficultyHandler)
 
     fs := http.FileServer(http.Dir("assets"))
     http.Handle("/assets/", http.StripPrefix("/assets/", fs))
@@ -27,10 +28,13 @@ func main() {
 
 func hangmanHandler(w http.ResponseWriter, r *http.Request) {
     if play.GetGame() == nil {
-        play.InitGame()
+        // Si le jeu n'est pas initialisé, rediriger vers la page de sélection de difficulté
+        http.Redirect(w, r, "/jouer", http.StatusFound)
+        return
     }
+
     game := play.GetGame()
-       err := templates.ExecuteTemplate(w, "hangman.html", game)
+    err := templates.ExecuteTemplate(w, "hangman.html", game)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -46,7 +50,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func jouerHandler(w http.ResponseWriter, r *http.Request) {
-    play.InitGame()
     err := templates.ExecuteTemplate(w, "jouer.html", nil)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -70,7 +73,16 @@ func StatusHandler(w http.ResponseWriter, r *http.Request) {
     http.Redirect(w, r, "/", http.StatusFound)
 }
 
-
-
-
-
+func difficultyHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method == "GET" {
+        err := templates.ExecuteTemplate(w, "difficulty.html", nil)
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+    } else if r.Method == "POST" {
+        difficulty := r.FormValue("difficulty")
+        play.InitGame(difficulty)
+        http.Redirect(w, r, "/hangman", http.StatusFound)
+    }
+}

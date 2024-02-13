@@ -17,6 +17,8 @@ type Game struct {
     GameStatus     string
     ProposedLetters []string
     HangmanImage    string
+    Score              int 
+    Streak             int
 }
 
 var (
@@ -24,20 +26,24 @@ var (
     game        Game
 )
 
-func InitGame() {
-    if initialWord == "" {
-        files := []string{"Ressources/french_words1.txt", "Ressources/french_words2.txt", "Ressources/french_words3.txt"}
-        rand.Seed(time.Now().UnixNano())
-        fileIndex := rand.Intn(len(files))
-        filePath := files[fileIndex]
-
-        word := getRandomWordFromFile(filePath)
-        initialWord = word
+func InitGame(difficulty string) {
+    var filePath string
+    switch difficulty {
+    case "easy":
+        filePath = "Ressources/french_words_easy.txt"
+    case "medium":
+        filePath = "Ressources/french_words_medium.txt"
+    case "hard":
+        filePath = "Ressources/french_words_hard.txt"
+    default:
+        filePath = "Ressources/french_words_easy.txt" // Par défaut, choisir facile
     }
 
+    word := getRandomWordFromFile(filePath)
+
     game = Game{
-        Word:           initialWord,
-        PartialWord:    strings.Repeat("-", len(initialWord)),
+        Word:           word,
+        PartialWord:    strings.Repeat("-", len(word)),
         GuessedLetters: []string{},
         LivesRemaining: 10,
         GameStatus:     "",
@@ -70,6 +76,14 @@ func GuessLetter(letter string) {
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
         game.HangmanImage = fmt.Sprintf("/assets/Hangman_%d.png", 10-game.LivesRemaining)
+        game.Streak = 0 // Réinitialiser la série si le joueur se trompe
+    } else {
+        // Si la lettre est correcte, augmenter le score et mettre à jour la série
+        game.Score += 100
+        game.Streak++
+        if game.Streak > 1 {
+            game.Score *= game.Streak // Si le joueur trouve des lettres d'affilée, doubler le score
+        }
     }
 
     game.PartialWord = updatePartialWord(letter)
@@ -80,11 +94,6 @@ func GuessLetter(letter string) {
         game.GameStatus = "game over"
     }
 }
-
-func (g *Game) AddProposedLetter(letter string) {
-    g.ProposedLetters = append(g.ProposedLetters, letter)
-}
-
 
 func updatePartialWord(letter string) string {
     updatedWord := ""

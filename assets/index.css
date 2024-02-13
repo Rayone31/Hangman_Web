@@ -6,6 +6,12 @@ body {
     flex-direction: column;
     align-items: center;
     position: relative;
+    height: 100vh; /* Ajoutez cette ligne */
+
+    background-image: url('../assets/pirate_hangman.png'), url('../assets/cowboy_hangman.png'), linear-gradient(to right, black, black);
+    background-position: left center, right center, center center;
+    background-repeat: no-repeat, no-repeat, repeat-y;
+    background-size: calc(50% - 1.5px) 100%, calc(50% - 1.5px) 100%, 3px 100%;
 }
 
 #hangman_titre img {
@@ -18,15 +24,20 @@ body {
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    border: 3.5px solid black; /* Ajoutez cette ligne */
     border-radius: 15px;
     max-width: 15%;
-    margin: auto;
+    margin: 5px;
     margin-top: 5%;
     background-color: aliceblue;
     color: black;
     text-decoration: none;
 }
 
+
+
 .button:hover {
     background-color: deepskyblue;
 }
+
+

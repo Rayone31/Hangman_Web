@@ -1,0 +1,9 @@
+banc
+cle
+coin
+eau
+lit
+mur
+faux
+vrai
+plat
