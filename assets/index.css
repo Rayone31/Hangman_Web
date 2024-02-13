@@ -1,7 +1,15 @@
+@font-face {
+    font-family: "Pixel";
+    src: url(../assets/matrix-sans.woff) format("woff");
+}
+
+
+
 body {
+    font-family: "Pixel";
     text-align: center;
-    background-color: midnightblue;
-    color: aliceblue;
+    background-color: firebrick;
+    color: gold;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,20 +32,20 @@ body {
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    border: 3.5px solid black; /* Ajoutez cette ligne */
+    border: 3.5px solid goldenrod; /* Ajoutez cette ligne */
     border-radius: 15px;
     max-width: 15%;
     margin: 5px;
     margin-top: 5%;
-    background-color: aliceblue;
-    color: black;
+    background-color: red;
+    color: gold;
     text-decoration: none;
 }
 
 
 
 .button:hover {
-    background-color: deepskyblue;
+    background-color: crimson;
 }
 
 

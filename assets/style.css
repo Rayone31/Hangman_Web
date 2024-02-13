@@ -1,7 +1,8 @@
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    background-color: midnightblue;
-    color: aliceblue;
+    background-color: firebrick;
+    color: gold;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,15 +19,19 @@ img {
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    border: 3.5px solid goldenrod; /* Ajoutez cette ligne */
     border-radius: 15px;
     max-width: 15%;
-    margin: auto;
+    margin: 5px;
     margin-top: 5%;
-    background-color: aliceblue;
-    color: black;
+    background-color: red;
+    color: gold;
     text-decoration: none;
 }
 
+
+
 .button:hover {
-    background-color: deepskyblue;
+    background-color: crimson;
 }
+
