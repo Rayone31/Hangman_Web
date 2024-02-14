@@ -26,15 +26,15 @@ var (
     game        Game
 )
 
-func InitGame(difficulty string) {
+func InitGame(difficulty string, language string) {
     var filePath string
     switch difficulty {
     case "easy":
-        filePath = "Ressources/french_words_easy.txt"
+        filePath = "Ressources/" + language + "_words_easy.txt"
     case "medium":
-        filePath = "Ressources/french_words_medium.txt"
+        filePath = "Ressources/" + language + "_words_medium.txt"
     case "hard":
-        filePath = "Ressources/french_words_hard.txt"
+        filePath = "Ressources/" + language + "_words_hard.txt"
     default:
         filePath = "Ressources/french_words_easy.txt" // Par défaut, choisir facile
     }

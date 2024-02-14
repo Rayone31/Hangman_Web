@@ -7,15 +7,31 @@
     <title>Choix de la difficulté</title>
 </head>
 <body>
-    <h1>Choix de la difficulté</h1>
-    <form action="/difficulty" method="post">
-        <label for="difficulty">Choisissez la difficulté :</label>
-        <select name="difficulty" id="difficulty">
-            <option value="easy">Facile</option>
-            <option value="medium">Moyen</option>
-            <option value="hard">Difficile</option>
-        </select>
-        <button type="submit">Valider</button>
-    </form>
+    <div class="difficulty-container">
+        <h1>Choix de la difficulté</h1>
+        <form action="/difficulty" method="post">
+            <div class="difficulty-buttons">
+                <input type="radio" id="easy" name="difficulty" value="easy">
+                <label for="easy" class="difficulty-label">Facile</label>
+                
+                <input type="radio" id="medium" name="difficulty" value="medium">
+                <label for="medium" class="difficulty-label">Moyen</label>
+                
+                <input type="radio" id="hard" name="difficulty" value="hard">
+                <label for="hard" class="difficulty-label">Difficile</label>
+            </div>
+            <div class="language-buttons">
+                <input type="radio" id="french" name="language" value="french">
+                <label for="french" class="language-label">Français</label>
+                
+                <input type="radio" id="english" name="language" value="english">
+                <label for="english" class="language-label">Anglais</label>
+                
+                <input type="radio" id="spanish" name="language" value="spanish">
+                <label for="spanish" class="language-label">Espagnol</label>
+            </div>
+            <button type="submit" class="validate-button">Valider</button>
+        </form>
+    </div>
 </body>
 </html>

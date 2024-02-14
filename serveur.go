@@ -82,7 +82,12 @@ func difficultyHandler(w http.ResponseWriter, r *http.Request) {
         }
     } else if r.Method == "POST" {
         difficulty := r.FormValue("difficulty")
-        play.InitGame(difficulty)
+        language := r.FormValue("language")
+        if difficulty == "" || language == "" {
+            http.Error(w, "Veuillez sélectionner une difficulté et une langue", http.StatusBadRequest)
+            return
+        }
+        play.InitGame(difficulty, language)
         http.Redirect(w, r, "/hangman", http.StatusFound)
     }
 }

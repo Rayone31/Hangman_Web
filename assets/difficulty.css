@@ -1,51 +1,57 @@
-@font-face {
-    font-family: "Pixel";
-    src: url(../assets/matrix-sans.woff) format("woff");
-}
-
 body {
-    font-family: "Pixel";
-    text-align: center;
-    background-color: firebrick;
-    color: gold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-img {
-    height: 350px;
-    width: auto;
-}
-
-.button {  
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    border: 3.5px solid goldenrod; /* Ajoutez cette ligne */
-    border-radius: 15px;
-    max-width: 15%;
-    margin: 5px;
-    margin-top: 5%;
-    background-color: red;
-    color: gold;
-    text-decoration: none;
+    height: 100vh;
+    margin: 0;
 }
 
-
-
-.button:hover {
-    background-color: crimson;
+.difficulty-container {
+    background-color: #333;
+    padding: 40px; /* Augmenter la marge intérieure */
+    border-radius: 20px; /* Augmenter le rayon de la bordure */
+    text-align: center;
 }
 
-/* Styles spécifiques pour la page de choix de la difficulté */
-
-form {
-    margin-bottom: 20px;
+.difficulty-buttons,
+.language-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px; /* Augmenter la marge inférieure */
 }
 
-button {
-    margin-top: 10px;
+.difficulty-buttons input[type="radio"],
+.language-buttons input[type="radio"] {
+    display: none; /* Pour cacher les boutons radio */
+}
+
+.difficulty-label,
+.language-label {
+    background-color: #ddd; /* Couleur de fond pour les boutons */
+    padding: 20px 40px; /* Augmenter l'espace de remplissage */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointeur */
+    margin-right: 20px; /* Espacement entre les boutons */
+}
+
+/* Styliser les boutons sélectionnés */
+.difficulty-buttons input[type="radio"]:checked + .difficulty-label,
+.language-buttons input[type="radio"]:checked + .language-label {
+    background-color: #999; /* Couleur de fond différente pour les boutons sélectionnés */
+    color: white; /* Couleur du texte */
+}
+
+.validate-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 20px 40px; /* Augmenter l'espace de remplissage */
+    font-size: 20px; /* Augmenter la taille de la police */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer;
+}
+
+.validate-button:hover {
+    background-color: #0056b3;
 }

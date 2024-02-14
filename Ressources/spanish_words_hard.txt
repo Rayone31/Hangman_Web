@@ -1,0 +1,12 @@
+escritura
+escalera
+estantería
+exterior
+interior
+perchero
+radiador
+cremallera
+verdadero
+mosquito
+almendra
+turbulencia
