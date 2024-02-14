@@ -5,10 +5,12 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: firebrick;
+    color: crimson;
 }
 
 .difficulty-container {
-    background-color: #333;
+    background-color: goldenrod;
     padding: 40px; /* Augmenter la marge intérieure */
     border-radius: 20px; /* Augmenter le rayon de la bordure */
     text-align: center;
@@ -28,7 +30,8 @@ body {
 
 .difficulty-label,
 .language-label {
-    background-color: #ddd; /* Couleur de fond pour les boutons */
+    background-color: red; /* Couleur de fond pour les boutons */
+    color: gold;
     padding: 20px 40px; /* Augmenter l'espace de remplissage */
     border-radius: 10px; /* Coins arrondis */
     cursor: pointer; /* Curseur pointeur */
@@ -38,13 +41,13 @@ body {
 /* Styliser les boutons sélectionnés */
 .difficulty-buttons input[type="radio"]:checked + .difficulty-label,
 .language-buttons input[type="radio"]:checked + .language-label {
-    background-color: #999; /* Couleur de fond différente pour les boutons sélectionnés */
-    color: white; /* Couleur du texte */
+    background-color: firebrick; /* Couleur de fond différente pour les boutons sélectionnés */
+    color: gold; /* Couleur du texte */
 }
 
 .validate-button {
-    background-color: #007bff;
-    color: white;
+    background-color: red;
+    color: gold;
     border: none;
     padding: 20px 40px; /* Augmenter l'espace de remplissage */
     font-size: 20px; /* Augmenter la taille de la police */
@@ -53,5 +56,5 @@ body {
 }
 
 .validate-button:hover {
-    background-color: #0056b3;
+    background-color: crimson;
 }
