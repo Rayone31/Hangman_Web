@@ -1,5 +1,10 @@
+@font-face {
+    font-family: "Pixel";
+    src: url(../assets/matrix-sans.woff) format("woff");
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Pixel";
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +51,7 @@ body {
 }
 
 .validate-button {
+    font-family: "Pixel";
     background-color: red;
     color: gold;
     border: none;
