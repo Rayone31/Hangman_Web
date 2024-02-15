@@ -6,6 +6,7 @@
 }
 
 body {
+    font-family: "Pixel";
     background-color: #000221; /* Bleu foncé */
     height: 100vh;
     margin: 0;

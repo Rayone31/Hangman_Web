@@ -53,6 +53,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     padding: 1rem;
     border: 3.5px solid goldenrod; /* Ajoutez cette ligne */
     border-radius: 15px;
