@@ -1,5 +1,10 @@
 /* scoreboard.css */
 
+@font-face {
+    font-family: "Pixel";
+    src: url(../assets/AwfullyDigital.woff) format("woff");
+}
+
 body {
     font-family: "Pixel", sans-serif;
     text-align: center;
