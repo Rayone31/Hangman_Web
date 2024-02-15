@@ -1,0 +1,61 @@
+/* victoire.css */
+
+@font-face {
+    font-family: "Pixel";
+    src: url(../assets/matrix-sans.woff) format("woff");
+}
+
+body {
+    background-color: #000221; /* Bleu foncé */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.victory-image img {
+    max-width: 61%; /* Ajustez la taille de l'image selon vos besoins */
+    height: auto;
+    display: block; /* Pour centrer l'image horizontalement */
+    margin: 0 auto; /* Pour centrer l'image verticalement */
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Marge entre l'image et les boutons */
+}
+
+.button {  
+    padding: 1rem;
+    border: 3.5px solid rgb(240, 240, 240);
+    border-radius: 15px;
+    margin: 0 10px; /* Marge entre les boutons */
+    background-color: rgb(50, 24, 75);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: rgb(220, 20, 60);
+}
+
+.score {
+    color: white; /* Couleur du texte */
+    font-size: 24px; /* Taille de la police */
+    position: absolute; /* Position absolue pour pouvoir ajuster */
+    top: 8%; /* Aligner le haut du score à 40% de la hauteur de la fenêtre */
+    left: 2%; /* Décaler le score vers la gauche de 10% de la largeur de la fenêtre */
+    transform: translateY(-50%); /* Centrer le score verticalement */
+}
+

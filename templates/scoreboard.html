@@ -1,0 +1,37 @@
+<!-- scoreboard.html -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau des scores</title>
+    <link rel="stylesheet" href="../assets/scoreboard.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tableau des scores</h1>
+        {{if .ShowNameInput}}
+        <div class="score-form">
+            <form action="/sauvegarder" method="post">
+                <input type="text" name="player_name" placeholder="Nom du joueur">
+                <input type="hidden" name="score" value="{{.NewScore}}">
+                <input type="submit" value="Sauvegarder">
+            </form>
+        </div>
+        {{end}}
+        <div class="scores">
+            <ol>
+                {{range $index, $score := .Scores}}
+                <li>{{$index}}: {{$score.PlayerName}}: {{$score.Value}}</li>
+                {{end}}
+            </ol>
+        </div>
+        <div class="button-row">
+            <div class="button">
+                <a href="/" style="text-decoration: none; color: gold;">Menu</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

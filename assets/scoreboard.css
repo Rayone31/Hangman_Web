@@ -1,0 +1,63 @@
+/* scoreboard.css */
+
+body {
+    font-family: "Pixel", sans-serif;
+    text-align: center;
+    background-color: firebrick;
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-form {
+    margin-bottom: 20px;
+}
+
+.score-form input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid gold;
+}
+
+.score-form input[type="submit"] {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: gold;
+    color: firebrick;
+    border: none;
+    cursor: pointer;
+}
+
+.score-form input[type="submit"]:hover {
+    background-color: darkgoldenrod;
+}
+
+.scores {
+    margin-bottom: 20px;
+}
+
+.scores ol {
+    list-style: none;
+    padding: 0;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: gold;
+    color: firebrick;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: darkgoldenrod;
+}

@@ -1,0 +1,32 @@
+<!-- victoire.html -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoire</title>
+    <link rel="stylesheet" href="../assets/victoire.css">
+</head>
+<body>
+    <div class="container">
+        <div class="score">
+            <p>Score: {{.Score}}</p>
+        </div>
+        <div class="victory-image">
+            <img src="../assets/victory.png" alt="Victoire">
+        </div>
+        <div class="button-row">
+            <div class="button">
+                <a href="/" style="text-decoration: none; color: gold;">Retourner au menu</a>
+            </div>
+            <div class="button">
+                <a href="/difficulty" style="text-decoration: none; color: gold;">Rejouer</a>
+            </div>
+            <div class="button">
+                <a href="/scoreboard" style="text-decoration: none; color: gold;">Sauvegarder le score</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

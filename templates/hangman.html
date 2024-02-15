@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/hangman.css">
 </head>
 <body>
-    <!-- <div id="word">{{.Word}}</div> -->
+     <div id="word">{{.Word}}</div> 
     <!-- Affichage du mot partiel -->
     <div id="partial-word">{{.PartialWord}}</div>
 
@@ -27,20 +27,6 @@
     <div id="lives-remaining">
         Vies restantes : {{.LivesRemaining}}
     </div>
-
-    <!-- Affichage du statut du jeu -->
-    {{if eq .GameStatus "victory"}}
-        <div id="game-status">
-            <img src="/assets/victory.png" alt="Victoire">
-        </div>
-    {{else if eq .GameStatus "game over"}}
-        <div id="game-status">
-            <img src="/assets/defaite.png" alt="Défaite">
-            <form action="/finish" method="get">
-                <button type="submit">Retourner à l'accueil</button>
-            </form>
-        </div>
-    {{end}}
 
     <!-- Formulaire pour proposer une lettre -->
     {{if eq .GameStatus ""}}
@@ -63,6 +49,5 @@
     <div id="hangman-image">
         <img src="{{.HangmanImage}}" alt="Pendu">
     </div>
-
 </body>
 </html>

@@ -2,28 +2,33 @@ package play
 
 import (
     "bufio"
+    "fmt"
     "math/rand"
     "os"
     "strings"
     "time"
-    "fmt"
 )
 
 type Game struct {
-    Word           string
-    PartialWord    string
-    GuessedLetters []string
-    LivesRemaining int
-    GameStatus     string
+    Word            string
+    PartialWord     string
+    GuessedLetters  []string
+    LivesRemaining  int
+    GameStatus      string
     ProposedLetters []string
     HangmanImage    string
-    Score              int 
-    Streak             int
+    Score           int
+    Streak          int
+}
+
+type Score struct {
+    PlayerName string
+    Value      int
 }
 
 var (
-    initialWord string
-    game        Game
+    game   Game
+    scores []Score
 )
 
 func InitGame(difficulty string, language string) {
@@ -36,19 +41,19 @@ func InitGame(difficulty string, language string) {
     case "hard":
         filePath = "Ressources/" + language + "_words_hard.txt"
     default:
-        filePath = "Ressources/french_words_easy.txt" // Par défaut, choisir facile
+        filePath = "Ressources/french_words_easy.txt" 
     }
 
     word := getRandomWordFromFile(filePath)
 
     game = Game{
-        Word:           word,
-        PartialWord:    strings.Repeat("-", len(word)),
-        GuessedLetters: []string{},
-        LivesRemaining: 10,
-        GameStatus:     "",
+        Word:            word,
+        PartialWord:     strings.Repeat("-", len(word)),
+        GuessedLetters:  []string{},
+        LivesRemaining:  10,
+        GameStatus:      "",
         ProposedLetters: []string{},
-        HangmanImage:   "/assets/Hangman_0.png",
+        HangmanImage:    "/assets/Hangman_0.png",
     }
 }
 
@@ -58,11 +63,9 @@ func GetGame() *Game {
 
 func GuessLetter(letter string) {
     if game.GameStatus != "" {
-        ResetGame()
         return
     }
 
-    // Ajouter la lettre proposée à la liste des lettres proposées
     game.ProposedLetters = append(game.ProposedLetters, letter)
 
     for _, guessedLetter := range game.GuessedLetters {
@@ -76,13 +79,12 @@ func GuessLetter(letter string) {
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
         game.HangmanImage = fmt.Sprintf("/assets/Hangman_%d.png", 10-game.LivesRemaining)
-        game.Streak = 0 // Réinitialiser la série si le joueur se trompe
+        game.Streak = 0
     } else {
-        // Si la lettre est correcte, augmenter le score et mettre à jour la série
         game.Score += 100
         game.Streak++
         if game.Streak > 1 {
-            game.Score *= game.Streak // Si le joueur trouve des lettres d'affilée, doubler le score
+            game.Score *= game.Streak
         }
     }
 
@@ -90,8 +92,10 @@ func GuessLetter(letter string) {
 
     if game.PartialWord == game.Word {
         game.GameStatus = "victory"
+        return
     } else if game.LivesRemaining == 0 {
         game.GameStatus = "game over"
+        return
     }
 }
 
@@ -129,6 +133,14 @@ func getRandomWordFromFile(filePath string) string {
 }
 
 func ResetGame() {
-    initialWord = ""
     game = Game{}
+    game.Score = 0
+}
+
+func AddScore(score Score) {
+    scores = append(scores, score)
+}
+
+func GetScores() []Score {
+    return scores
 }
