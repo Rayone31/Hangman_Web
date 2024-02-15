@@ -7,12 +7,14 @@
 
 body {
     font-family: "Pixel", sans-serif;
+    font-size: 250%;
     text-align: center;
     background-color: firebrick;
     color: gold;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
 }
 
 .score-form {
@@ -48,21 +50,23 @@ body {
     padding: 0;
 }
 
-.button-row {
+.button {  
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    padding: 1rem;
+    border: 3.5px solid goldenrod; /* Ajoutez cette ligne */
+    border-radius: 15px;
+    max-width: 15%;
+    margin: 5px;
+    margin-top: 5%;
+    background-color: red;
+    color: gold;
+    text-decoration: none;
 }
 
-.button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    background-color: gold;
-    color: firebrick;
-    text-decoration: none;
-    border-radius: 5px;
-}
+
 
 .button:hover {
-    background-color: darkgoldenrod;
+    background-color: crimson;
 }

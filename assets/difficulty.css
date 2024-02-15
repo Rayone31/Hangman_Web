@@ -4,6 +4,7 @@
 }
 
 body {
+    font-size: 250%;
     font-family: "Pixel";
     display: flex;
     justify-content: center;
