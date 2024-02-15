@@ -16,7 +16,7 @@
             <form action="/sauvegarder" method="post">
                 <input type="text" name="player_name" placeholder="Nom du joueur">
                 <input type="hidden" name="score" value="{{.NewScore}}">
-                <input type="submit" value="Sauvegarder">
+                <input type="submit" value="Sauvegarder" class="button save-button">
             </form>
         </div>
         {{end}}
@@ -28,7 +28,7 @@
             </ol>
         </div>
 
-        <a href="/" class="button">Menu</a>
+        <a href="/" class="button menu-button">Menu</a>
 
     </div>
 </body>

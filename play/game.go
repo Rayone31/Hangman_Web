@@ -1,5 +1,7 @@
+// Définition du package
 package play
 
+// Importation des packages nécessaires
 import (
     "bufio"
     "fmt"
@@ -9,6 +11,7 @@ import (
     "time"
 )
 
+// Définition de la structure Game qui représente une partie de jeu
 type Game struct {
     Word            string
     PartialWord     string
@@ -21,17 +24,21 @@ type Game struct {
     Streak          int
 }
 
+// Définition de la structure Score qui représente le score d'un joueur
 type Score struct {
     PlayerName string
     Value      int
 }
 
+// Déclaration des variables globales
 var (
     game   Game
     scores []Score
 )
 
+// InitGame initialise une nouvelle partie de jeu
 func InitGame(difficulty string, language string) {
+    // Sélection du fichier de mots en fonction de la difficulté et de la langue
     var filePath string
     switch difficulty {
     case "easy":
@@ -44,8 +51,10 @@ func InitGame(difficulty string, language string) {
         filePath = "Ressources/french_words_easy.txt" 
     }
 
+    // Obtention d'un mot aléatoire à partir du fichier
     word := getRandomWordFromFile(filePath)
 
+    // Initialisation de la partie de jeu
     game = Game{
         Word:            word,
         PartialWord:     strings.Repeat("-", len(word)),
@@ -57,30 +66,39 @@ func InitGame(difficulty string, language string) {
     }
 }
 
+// GetGame renvoie la partie de jeu actuelle
 func GetGame() *Game {
     return &game
 }
 
+// GuessLetter traite une lettre proposée par le joueur
 func GuessLetter(letter string) {
+    // Si le jeu est terminé, on ne fait rien
     if game.GameStatus != "" {
         return
     }
 
+    // Ajout de la lettre proposée à la liste des lettres proposées
     game.ProposedLetters = append(game.ProposedLetters, letter)
 
+    // Si la lettre a déjà été devinée, on ne fait rien
     for _, guessedLetter := range game.GuessedLetters {
         if guessedLetter == letter {
             return
         }
     }
 
+    // Ajout de la lettre à la liste des lettres devinées
     game.GuessedLetters = append(game.GuessedLetters, letter)
 
+    // Si la lettre n'est pas dans le mot, on décrémente le nombre de vies restantes
+    // et on met à jour l'image du pendu
     if !strings.Contains(game.Word, letter) {
         game.LivesRemaining--
         game.HangmanImage = fmt.Sprintf("/assets/Hangman_%d.png", 10-game.LivesRemaining)
         game.Streak = 0
     } else {
+        // Si la lettre est dans le mot, on augmente le score et la série
         game.Score += 100
         game.Streak++
         if game.Streak > 1 {
@@ -88,8 +106,11 @@ func GuessLetter(letter string) {
         }
     }
 
+    // Mise à jour du mot partiellement deviné
     game.PartialWord = updatePartialWord(letter)
 
+    // Si le mot a été entièrement deviné, on déclare une victoire
+    // Sinon, si le nombre de vies restantes est nul, on déclare une défaite
     if game.PartialWord == game.Word {
         game.GameStatus = "victory"
         return
@@ -99,6 +120,7 @@ func GuessLetter(letter string) {
     }
 }
 
+// updatePartialWord met à jour le mot partiellement deviné avec la nouvelle lettre
 func updatePartialWord(letter string) string {
     updatedWord := ""
     for i, char := range game.Word {
@@ -111,6 +133,7 @@ func updatePartialWord(letter string) string {
     return updatedWord
 }
 
+// getRandomWordFromFile obtient un mot aléatoire à partir d'un fichier
 func getRandomWordFromFile(filePath string) string {
     file, err := os.Open(filePath)
     if err != nil {
@@ -132,15 +155,18 @@ func getRandomWordFromFile(filePath string) string {
     return words[rand.Intn(len(words))]
 }
 
+// ResetGame réinitialise la partie de jeu
 func ResetGame() {
     game = Game{}
     game.Score = 0
 }
 
+// AddScore ajoute un score à la liste des scores
 func AddScore(score Score) {
     scores = append(scores, score)
 }
 
+// GetScores renvoie la liste des scores
 func GetScores() []Score {
     return scores
 }
